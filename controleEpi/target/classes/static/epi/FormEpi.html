@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de EPIs</title>
+</head>
+<body>
+    <h1>Cadastro de EPI</h1>
+
+    <form action="/epis" method="post">
+        <label for="nome">Nome do EPI:</label><br>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="validade">Data de Validade:</label><br>
+        <input type="date" id="validade" name="validade" required><br><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <hr>
+
+    <h2>Ver EPIs Cadastrados</h2>
+    <a href="/epis">Listar EPIs</a>
+</body>
+</html>
