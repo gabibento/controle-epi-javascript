@@ -24,4 +24,5 @@ public class EpiController {
     public List<Epi> listar() {
         return epiRepository.buscarTodos();
     }
+    
 }
