@@ -28,4 +28,12 @@ public class EpiRepository {
             }
         });
     }
+
+    public List<Epi> buscarEpi() {
+        return jdbc.query("SELECT * FROM epis WHERE nome = ?"
+        @Override
+        public Epi mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new Epi(rs.getString("nome"), rs.getString("validade"));
+        });
+    }
 }
