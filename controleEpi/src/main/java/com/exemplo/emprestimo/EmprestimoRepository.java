@@ -29,9 +29,9 @@ public class EmprestimoRepository {
         });
     }
 
-    public Emprestimo buscarPorUsuario(String usuario) {
-        String sql = "SELECT * FROM emprestimos WHERE usuario = ?";
-        return jdbc.queryForObject(sql, new Object[]{usuario}, new RowMapper<Emprestimo>() {
+    public Emprestimo buscarPorEmprestimo(String epi, String usuario) {
+        String sql = "SELECT * FROM emprestimos WHERE epi = ? AND usuario = ?";
+        return jdbc.queryForObject(sql, new Object[]{epi, usuario}, new RowMapper<Emprestimo>() {
             @Override
             public Emprestimo mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return new Emprestimo(rs.getString("epi"), rs.getString("usuario"), rs.getDate("dataEmprestimo"), rs.getDate("dataDevolucao"));
@@ -39,9 +39,9 @@ public class EmprestimoRepository {
         });
     }
 
-    public List<Emprestimo> buscarPorUsuarioParcial(String usuario) {
-        String sql = "SELECT * FROM emprestimos WHERE usuario LIKE ?";
-        return jdbc.query(sql, new Object[]{"%" + usuario + "%"}, new RowMapper<Emprestimo>() {
+    public List<Emprestimo> buscarPorEmprestimoParcial(String epi, String usuario) {
+        String sql = "SELECT * FROM emprestimos WHERE epi LIKE ? AND usuario LIKE ?";
+        return jdbc.query(sql, new Object[]{"%" + epi + "%", "%" + usuario + "%"}, new RowMapper<Emprestimo>() {
             @Override
             public Emprestimo mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return new Emprestimo(rs.getString("epi"), rs.getString("usuario"), rs.getDate("dataEmprestimo"), rs.getDate("dataDevolucao"));
