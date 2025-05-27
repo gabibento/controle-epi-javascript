@@ -29,11 +29,25 @@ public class EpiRepository {
         });
     }
 
-    public List<Epi> buscarEpi() {
-        return jdbc.query("SELECT * FROM epis WHERE nome = ?"
-        @Override
-        public Epi mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new Epi(rs.getString("nome"), rs.getString("validade"));
+    public Epi buscarPorNome(String nome) {
+        String sql = "SELECT * FROM epis WHERE nome = ?";
+        return jdbc.queryForObject(sql, new Object[]{nome}, new RowMapper<Epi>() {
+            @Override
+            public Epi mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Epi epi = new Epi(rs.getString("nome"), rs.getString("validade"));
+                return epi;
+            }
+        });
+    }
+
+    public List<Epi> buscarPorNomeParcial(String nome) {
+        String sql = "SELECT * FROM epis WHERE nome LIKE ?";
+        return jdbc.query(sql, new Object[]{"%" + nome + "%"}, new RowMapper<Epi>() {
+            @Override
+            public Epi mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Epi epi = new Epi(rs.getString("nome"), rs.getString("validade"));
+                return epi;
+            }
         });
     }
 }
