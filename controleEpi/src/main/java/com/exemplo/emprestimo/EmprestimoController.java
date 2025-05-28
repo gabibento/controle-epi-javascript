@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -17,7 +17,7 @@ public class EmprestimoController {
     private EmprestimoRepository emprestimoRepository;
 
     @PostMapping("/emprestimos")
-    public String salvar(@RequestParam Epi epi, @RequestParam Usuario usuario, @RequestParam LocalTime dataEmprestimo, @RequestParam LocalTime dataDevolucao) {
+    public String salvar(@RequestParam Epi epi, @RequestParam Usuario usuario, @RequestParam LocalDate dataEmprestimo, @RequestParam LocalDate dataDevolucao) {
         emprestimoRepository.salvar(new Emprestimo(epi, usuario, dataEmprestimo, dataDevolucao));
         return "redirect:/emprestimos";
     }
