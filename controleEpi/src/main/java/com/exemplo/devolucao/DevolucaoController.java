@@ -18,13 +18,13 @@ public class DevolucaoController {
     @Autowired
     private DevolucaoRepository devolucaoRepository;
 
-    @PostMapping("/devolucoes");
+    @PostMapping("/devolucoes")
     public String salvar(@RequestParam Usuario usuario, @RequestParam Epi epi, @RequestParam LocalDate dataDevolucao) {
-        devolucaoRepository.salvar(new Devolucao(usuario,epi,dataDevolucao));
+        devolucaoRepository.salvar(new Devolucao(epi,usuario,dataDevolucao));
         return "redirect:/devolucoes";
     }
 
-    @GetMapping("/devolucoes");
+    @GetMapping("/devolucoes")
     @ResponseBody
     public List<Devolucao> listar(){
         return devolucaoRepository.buscarTodos();

@@ -15,13 +15,13 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @PostMapping("/usuarios");
+    @PostMapping("/usuarios")
     public String salvar(@RequestParam String nome, @RequestParam String email){
         usuarioRepository.salvar(new Usuario(nome,email));
         return "redirect:/usuarios";
     }
 
-    @GetMapping("/usuarios");
+    @GetMapping("/usuarios")
     @ResponseBody
     public List<Usuario> listar(){
         return usuarioRepository.buscarTodos();
