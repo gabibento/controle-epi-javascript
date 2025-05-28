@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.exemplo.epi.Epi;
+import com.exemplo.usuario.Usuario;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -29,9 +31,9 @@ public class EmprestimoRepository {
         });
     }
 
-    public Emprestimo buscarPorUsuario(String usuario) {
-        String sql = "SELECT * FROM emprestimos WHERE usuario = ?";
-        return jdbc.queryForObject(sql, new Object[]{usuario}, new RowMapper<Emprestimo>() {
+    public Emprestimo buscarPorNome(Epi epi, Usuario usuario) {
+        String sql = "SELECT * FROM emprestimos WHERE epi = ? AND usuario LIKE ?";
+        return jdbc.queryForObject(sql, new Object[]{epi, usuario}, new RowMapper<Emprestimo>() {
             @Override
             public Emprestimo mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return new Emprestimo(rs.getString("epi"), rs.getString("usuario"), rs.getDate("dataEmprestimo"), rs.getDate("dataDevolucao"));
@@ -39,9 +41,9 @@ public class EmprestimoRepository {
         });
     }
 
-    public List<Emprestimo> buscarPorUsuarioParcial(String usuario) {
-        String sql = "SELECT * FROM emprestimos WHERE usuario LIKE ?";
-        return jdbc.query(sql, new Object[]{"%" + usuario + "%"}, new RowMapper<Emprestimo>() {
+    public List<Emprestimo> buscarPorNomeParcial(Epi epi, Usuario usuario) {
+        String sql = "SELECT * FROM emprestimos WHERE epi LIKE ? AND usuario LIKE ?";
+        return jdbc.query(sql, new Object[]{"%" + epi + "%", "%" + usuario + "%"}, new RowMapper<Emprestimo>() {
             @Override
             public Emprestimo mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return new Emprestimo(rs.getString("epi"), rs.getString("usuario"), rs.getDate("dataEmprestimo"), rs.getDate("dataDevolucao"));

@@ -3,27 +3,43 @@ package com.exemplo.emprestimo;
 import com.exemplo.epi.Epi;
 import com.exemplo.usuario.Usuario;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 
 public class Emprestimo {
     private Epi epi;
     private Usuario usuario;
-    private LocalTime dataEmprestimo;
-    private LocalTime dataDevolucao;
+    private LocalDate dataEmprestimo;
+    private LocalDate dataDevolucao;
 
     public Epi getEpi() {
         return epi;
+    }
+
+    public void setEpi(Epi epi) {
+        this.epi = epi;
     }
 
     public Usuario getUsuario() {
         return usuario;
     }
 
-    public LocalTime getDataEmprestimo() {
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public LocalDate getDataEmprestimo() {
         return dataEmprestimo;
     }
 
-    public LocalTime getDataDevolucao() {
+    public void setDataEmprestimo(LocalDate dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public LocalDate getDataDevolucao() {
         return dataDevolucao;
+    }
+
+    public void setDataDevolucao(LocalDate dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
     }
 }
