@@ -1,8 +1,5 @@
 package com.exemplo.usuario;
 
-import com.exemplo.devolucao.Devolucao;
-import com.exemplo.emprestimo.Emprestimo;
-import com.exemplo.epi.Epi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,31 +20,31 @@ public class UsuarioRepository {
         jdbc.update(sql, usuario.getNome(), usuario.getEmail());
     }
 
-    public List<Emprestimo> buscarTodos() {
-        return jdbc.query("SELECT * FROM usuarios", new RowMapper<Emprestimo>() {
+    public List<Usuario> buscarTodos() {
+        return jdbc.query("SELECT * FROM usuarios", new RowMapper<Usuario>() {
             @Override
-            public Emprestimo mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return new Emprestimo(rs.getString("epi"), rs.getString("usuario"), rs.getDate("dataEmprestimo"), rs.getDate("dataDevolucao"));
+            public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new Usuario(rs.getString("nome"), rs.getString("email"));
             }
         });
     }
 
-    public Emprestimo buscarPorNome(String nome, String email) {
+    public Usuario buscarPorNome(String nome, String email) {
         String sql = "SELECT * FROM usuarios WHERE nome = ? AND email LIKE ?";
-        return jdbc.queryForObject(sql, new Object[]{nome, email}, new RowMapper<Emprestimo>() {
+        return jdbc.queryForObject(sql, new Object[]{nome, email}, new RowMapper<Usuario>() {
             @Override
-            public Emprestimo mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return new Emprestimo(rs.getString("nome"), rs.getString("email"));
+            public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new Usuario(rs.getString("nome"), rs.getString("email"));
             }
         });
     }
 
-    public List<Emprestimo> buscarPorNomeParcial(String nome, String email) {
+    public List<Usuario> buscarPorNomeParcial(String nome, String email) {
         String sql = "SELECT * FROM devolucoes WHERE nome LIKE ? AND email LIKE ?";
-        return jdbc.query(sql, new Object[]{"%" + nome + "%", "%" + email + "%"}, new RowMapper<Emprestimo>() {
+        return jdbc.query(sql, new Object[]{"%" + nome + "%", "%" + email + "%"}, new RowMapper<Usuario>() {
             @Override
-            public Emprestimo mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return new Emprestimo(rs.getString("nome"), rs.getString("email"));
+            public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new Usuario(rs.getString("nome"), rs.getString("email"));
             }
         });
     }

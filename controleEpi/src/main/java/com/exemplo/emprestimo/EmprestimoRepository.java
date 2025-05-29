@@ -1,15 +1,14 @@
 package com.exemplo.emprestimo;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
 import com.exemplo.epi.Epi;
 import com.exemplo.usuario.Usuario;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public class EmprestimoRepository {
@@ -26,7 +25,7 @@ public class EmprestimoRepository {
         return jdbc.query("SELECT * FROM emprestimos", new RowMapper<Emprestimo>() {
             @Override
             public Emprestimo mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return new Emprestimo(rs.getString("epi"), rs.getString("usuario"), rs.getDate("dataEmprestimo"), rs.getDate("dataDevolucao"));
+                return new Emprestimo(rs.getDate("dataDevolucao"), rs.getDate("dataEmprestimo"), rs.getUsuario("usuario"), rs.getEpi("epi"));
             }
         });
     }
@@ -36,7 +35,7 @@ public class EmprestimoRepository {
         return jdbc.queryForObject(sql, new Object[]{epi, usuario}, new RowMapper<Emprestimo>() {
             @Override
             public Emprestimo mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return new Emprestimo(rs.getString("epi"), rs.getString("usuario"), rs.getDate("dataEmprestimo"), rs.getDate("dataDevolucao"));
+                return new Emprestimo(rs.getDate("dataDevolucao"), rs.getDate("dataEmprestimo"), rs.getUsuario("usuario"), rs.getEpi("epi"));
             }
         });
     }
@@ -46,7 +45,7 @@ public class EmprestimoRepository {
         return jdbc.query(sql, new Object[]{"%" + epi + "%", "%" + usuario + "%"}, new RowMapper<Emprestimo>() {
             @Override
             public Emprestimo mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return new Emprestimo(rs.getString("epi"), rs.getString("usuario"), rs.getDate("dataEmprestimo"), rs.getDate("dataDevolucao"));
+                return new Emprestimo(rs.getDate("dataDevolucao"), rs.getDate("dataEmprestimo"), rs.getUsuario("usuario"), rs.getEpi("epi"));
             }
         });
     }

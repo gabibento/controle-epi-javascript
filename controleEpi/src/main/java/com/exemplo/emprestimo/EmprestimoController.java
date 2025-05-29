@@ -18,7 +18,7 @@ public class EmprestimoController {
 
     @PostMapping("/emprestimos")
     public String salvar(@RequestParam Epi epi, @RequestParam Usuario usuario, @RequestParam LocalDate dataEmprestimo, @RequestParam LocalDate dataDevolucao) {
-        emprestimoRepository.salvar(new Emprestimo(epi, usuario, dataEmprestimo, dataDevolucao));
+        emprestimoRepository.salvar(new Emprestimo(dataDevolucao, dataEmprestimo, usuario, epi));
         return "redirect:/emprestimos";
     }
 

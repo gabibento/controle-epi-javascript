@@ -11,6 +11,13 @@ public class Emprestimo {
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
 
+    public Emprestimo(LocalDate dataDevolucao, LocalDate dataEmprestimo, Usuario usuario, Epi epi) {
+        this.dataDevolucao = dataDevolucao;
+        this.dataEmprestimo = dataEmprestimo;
+        this.usuario = usuario;
+        this.epi = epi;
+    }
+
     public Epi getEpi() {
         return epi;
     }

@@ -20,7 +20,7 @@ public class DevolucaoController {
 
     @PostMapping("/devolucoes")
     public String salvar(@RequestParam Usuario usuario, @RequestParam Epi epi, @RequestParam LocalDate dataDevolucao) {
-        devolucaoRepository.salvar(new Devolucao(epi,usuario,dataDevolucao));
+        devolucaoRepository.salvar(new Devolucao(epi, usuario, dataDevolucao));
         return "redirect:/devolucoes";
     }
 

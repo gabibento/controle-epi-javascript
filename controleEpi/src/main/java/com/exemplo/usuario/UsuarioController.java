@@ -17,7 +17,7 @@ public class UsuarioController {
 
     @PostMapping("/usuarios")
     public String salvar(@RequestParam String nome, @RequestParam String email){
-        usuarioRepository.salvar(new Usuario(nome,email));
+        usuarioRepository.salvar(new Usuario(nome, email));
         return "redirect:/usuarios";
     }
 
