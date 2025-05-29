@@ -13,7 +13,15 @@ public class Epi {
         return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public String getValidade() {
         return validade;
+    }
+
+    public void setValidade(String validade) {
+        this.validade = validade;
     }
 }
