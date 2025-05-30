@@ -29,7 +29,7 @@ public class EpiRepository {
         });
     }
 
-    public Epi buscarPorNome(String nome) {
+    public Epi buscarPorEpi(String nome) {
         String sql = "SELECT * FROM epis WHERE nome = ?";
         return jdbc.queryForObject(sql, new Object[]{nome}, new RowMapper<Epi>() {
             @Override
@@ -40,7 +40,7 @@ public class EpiRepository {
         });
     }
 
-    public List<Epi> buscarPorNomeParcial(String nome) {
+    public List<Epi> buscarPorEpiParcial(String nome) {
         String sql = "SELECT * FROM epis WHERE nome LIKE ?";
         return jdbc.query(sql, new Object[]{"%" + nome + "%"}, new RowMapper<Epi>() {
             @Override

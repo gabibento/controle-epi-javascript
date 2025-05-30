@@ -11,11 +11,11 @@ public class Emprestimo {
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
 
-    public Emprestimo(LocalDate dataDevolucao, LocalDate dataEmprestimo, Usuario usuario, Epi epi) {
-        this.dataDevolucao = dataDevolucao;
-        this.dataEmprestimo = dataEmprestimo;
-        this.usuario = usuario;
+    public Emprestimo(Epi epi, Usuario usuario, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
         this.epi = epi;
+        this.usuario = usuario;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucao = dataDevolucao;
     }
 
     public Epi getEpi() {

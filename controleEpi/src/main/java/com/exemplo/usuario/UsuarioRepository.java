@@ -29,7 +29,7 @@ public class UsuarioRepository {
         });
     }
 
-    public Usuario buscarPorNome(String nome, String email) {
+    public Usuario buscarPorUsuario(String nome, String email) {
         String sql = "SELECT * FROM usuarios WHERE nome = ? AND email LIKE ?";
         return jdbc.queryForObject(sql, new Object[]{nome, email}, new RowMapper<Usuario>() {
             @Override
@@ -39,7 +39,7 @@ public class UsuarioRepository {
         });
     }
 
-    public List<Usuario> buscarPorNomeParcial(String nome, String email) {
+    public List<Usuario> buscarPorUsuarioParcial(String nome, String email) {
         String sql = "SELECT * FROM devolucoes WHERE nome LIKE ? AND email LIKE ?";
         return jdbc.query(sql, new Object[]{"%" + nome + "%", "%" + email + "%"}, new RowMapper<Usuario>() {
             @Override
