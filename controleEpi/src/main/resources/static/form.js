@@ -4,12 +4,11 @@ const divCampos = document.querySelector("#campos");
 const entidade = {
   epi: {
     nome: "text",
-    quantidade: "number"
+    validade: "date"
   },
   usuario: {
     nome: "text",
     email: "email",
-    senha: "password"
   },
   emprestimo: {
     nomeUsuario: "text",
@@ -25,6 +24,7 @@ const gerarFormulario = (entidadeSelecionada) => {
   form.action = entidadeSelecionada;
 
   for (let campo in campos) {
+    console.log(campos)
     divCampos.innerHTML += `
       <div>
         <label>${campo.charAt(0).toUpperCase() + campo.slice(1)}:</label>
