@@ -13,11 +13,11 @@ public class Emprestimo {
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
 
-    public Emprestimo(Epi epi, Usuario usuario, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
+    public Emprestimo(Epi epi, Usuario usuario, LocalDate dataDevolucao) {
         this.id = contadorId++;
         this.epi = epi;
         this.usuario = usuario;
-        this.dataEmprestimo = dataEmprestimo;
+        this.dataEmprestimo = LocalDate.now();
         this.dataDevolucao = dataDevolucao;
     }
 

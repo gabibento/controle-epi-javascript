@@ -11,12 +11,10 @@ const entidade = {
     email: "email",
   },
   emprestimos: {
-    nomeUsuario: "text",
+    nomeEpi: "text",
+    emailUsuario: "email",
     dataDevolucao: "date"
   }
-  // devolucoes: {
-  //   nome
-  //}
 };
 
 const gerarFormulario = (entidadeSelecionada) => {
