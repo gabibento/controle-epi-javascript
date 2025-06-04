@@ -21,7 +21,7 @@ public class DevolucaoRepository {
 
     public List<Devolucao> buscarTodos() {
         return jdbc.query("SELECT * FROM devolucoes", (rs, rowNum) -> {
-            Epi epi = new Epi(rs.getString("nome"), rs.getString("validade"));
+            Epi epi = new Epi(rs.getString("nome"), rs.getInt("quantidade"));
             Usuario usuario = new Usuario(rs.getString("nome"), rs.getString("email"));
             return new Devolucao(epi, usuario, rs.getDate("dataDevolucao").toLocalDate());
         });
@@ -30,7 +30,7 @@ public class DevolucaoRepository {
     public Devolucao buscarPorDevolucao(Epi epi, Usuario usuario) {
         String sql = "SELECT * FROM devolucoes WHERE epi = ? AND usuario LIKE ?";
         return jdbc.queryForObject(sql, new Object[]{epi, usuario}, (rs, rowNum) -> {
-            Epi epi1 = new Epi(rs.getString("nome"), rs.getString("validade"));
+            Epi epi1 = new Epi(rs.getString("nome"), rs.getInt("quantidade"));
             Usuario usuario1 = new Usuario(rs.getString("nome"), rs.getString("email"));
             return new Devolucao(epi1, usuario1, rs.getDate("dataDevolucao").toLocalDate());
         });
@@ -39,7 +39,7 @@ public class DevolucaoRepository {
     public List<Devolucao> buscarPorDevolucaoParcial(Epi epi, Usuario usuario) {
         String sql = "SELECT * FROM devolucoes WHERE epi LIKE ? AND usuario LIKE ?";
         return jdbc.query(sql, new Object[]{"%" + epi + "%", "%" + usuario + "%"}, (rs, rowNum) -> {
-            Epi epi1 = new Epi(rs.getString("nome"), rs.getString("validade"));
+            Epi epi1 = new Epi(rs.getString("nome"), rs.getInt("quantidade"));
             Usuario usuario1 = new Usuario(rs.getString("nome"), rs.getString("email"));
             return new Devolucao(epi, usuario, rs.getDate("dataDevolucao").toLocalDate());
         });

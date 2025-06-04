@@ -4,12 +4,20 @@ public class Epi {
     private static int contadorId = 1;
     private int id;
     private String nome;
-    private String validade;
+    private int quantidade;
 
-    public Epi(String nome, String validade) {
+    public Epi(String nome, int quantidade) {
         this.id = contadorId++;
         this.nome = nome;
-        this.validade = validade;
+        this.quantidade = quantidade;
+    }
+
+    public static int getContadorId() {
+        return contadorId;
+    }
+
+    public static void setContadorId(int contadorId) {
+        Epi.contadorId = contadorId;
     }
 
     public int getId() {
@@ -28,11 +36,13 @@ public class Epi {
         this.nome = nome;
     }
 
-    public String getValidade() {
-        return validade;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public void setValidade(String validade) {
-        this.validade = validade;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
+
+    
 }
