@@ -25,8 +25,7 @@ const gerarFormulario = (entidadeSelecionada) => {
 
   divCampos.innerHTML = '';
    form.action = entidadeSelecionada;
-console.log(form.action)
-
+   
   for (let campo in campos) {
     console.log(campos)
     divCampos.innerHTML += `
