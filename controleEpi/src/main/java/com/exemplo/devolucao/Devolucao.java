@@ -7,14 +7,26 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Devolucao {
+    private static int contadorId = 1;
+    private int id;
     private Epi epi;
     private Usuario usuario;
     private LocalDate dataDevolucao;
 
+
     public Devolucao(Epi epi, Usuario usuario, LocalDate dataDevolucao) {
+        this.id = contadorId ++;
         this.epi = epi;
         this.usuario = usuario;
         this.dataDevolucao = dataDevolucao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Epi getEpi() {

@@ -17,6 +17,7 @@ public class EpiRepository {
 
     public void salvar(Epi epi) {
         String sql = "INSERT INTO epis (nome, validade) VALUES (?, ?)";
+        System.out.println(epi);
         jdbc.update(sql, epi.getNome(), epi.getValidade());
     }
 
@@ -29,7 +30,7 @@ public class EpiRepository {
         });
     }
 
-    public Epi buscarPorNome(String nome) {
+    public Epi buscarPorEpi(String nome) {
         String sql = "SELECT * FROM epis WHERE nome = ?";
         return jdbc.queryForObject(sql, new Object[]{nome}, new RowMapper<Epi>() {
             @Override
@@ -40,7 +41,7 @@ public class EpiRepository {
         });
     }
 
-    public List<Epi> buscarPorNomeParcial(String nome) {
+    public List<Epi> buscarPorEpiParcial(String nome) {
         String sql = "SELECT * FROM epis WHERE nome LIKE ?";
         return jdbc.query(sql, new Object[]{"%" + nome + "%"}, new RowMapper<Epi>() {
             @Override
