@@ -17,6 +17,7 @@ public class EpiRepository {
 
     public void salvar(Epi epi) {
         String sql = "INSERT INTO epis (nome, validade) VALUES (?, ?)";
+        System.out.println(epi);
         jdbc.update(sql, epi.getNome(), epi.getValidade());
     }
 

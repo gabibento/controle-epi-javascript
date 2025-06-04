@@ -2,19 +2,21 @@ const form = document.querySelector("#form");
 const divCampos = document.querySelector("#campos");
 
 const entidade = {
-  epi: {
+  epis: {
     nome: "text",
-    quantidade: "number"
+    validade: "date"
   },
-  usuario: {
+  usuarios: {
     nome: "text",
     email: "email",
-    senha: "password"
   },
-  emprestimo: {
+  emprestimos: {
     nomeUsuario: "text",
     dataDevolucao: "date"
   }
+  // devolucoes: {
+  //   nome
+  //}
 };
 
 const gerarFormulario = (entidadeSelecionada) => {
@@ -22,9 +24,11 @@ const gerarFormulario = (entidadeSelecionada) => {
   if (!campos) return;
 
   divCampos.innerHTML = '';
-  form.action = entidadeSelecionada;
+   form.action = entidadeSelecionada;
+console.log(form.action)
 
   for (let campo in campos) {
+    console.log(campos)
     divCampos.innerHTML += `
       <div>
         <label>${campo.charAt(0).toUpperCase() + campo.slice(1)}:</label>
