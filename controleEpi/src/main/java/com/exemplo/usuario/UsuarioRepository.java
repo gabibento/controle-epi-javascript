@@ -17,7 +17,7 @@ public class UsuarioRepository {
     private JdbcTemplate jdbc;
 
     public void salvar(Usuario usuario) {
-        String sql = "INSERT INTO devolucoes (epi, usuario, dataDevolucao) VALUES (?, ?)";
+        String sql = "INSERT INTO usuarios (nome, email) VALUES (?, ?)";
         jdbc.update(sql, usuario.getNome(), usuario.getEmail());
     }
 
