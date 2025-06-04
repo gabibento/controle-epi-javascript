@@ -50,4 +50,14 @@ public class EpiRepository {
             }
         });
     }
+
+    public void atualizarPorNome(Epi epi) {
+        String sql = "UPDATE epis SET nome = ?, validade = ? WHERE nome = ?";
+        jdbc.update(sql, epi.getNome(), epi.getValidade());
+    }
+
+    public void deletarPorNome(String nome) {
+        String sql = "DELETE FROM epis WHERE nome = ?";
+        jdbc.update(sql, nome);
+    }
 }
