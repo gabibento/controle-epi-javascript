@@ -6,16 +6,27 @@ import com.exemplo.usuario.Usuario;
 import java.time.LocalDate;
 
 public class Emprestimo {
+    private static int contadorId = 1;
+    private int id;
     private Epi epi;
     private Usuario usuario;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
 
     public Emprestimo(Epi epi, Usuario usuario, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
+        this.id = contadorId++;
         this.epi = epi;
         this.usuario = usuario;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Epi getEpi() {
@@ -50,3 +61,4 @@ public class Emprestimo {
         this.dataDevolucao = dataDevolucao;
     }
 }
+
