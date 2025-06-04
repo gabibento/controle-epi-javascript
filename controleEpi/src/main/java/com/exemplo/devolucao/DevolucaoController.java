@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-public class DevolucaoController {
+public class    DevolucaoController {
 
     @Autowired
     private DevolucaoRepository devolucaoRepository;
