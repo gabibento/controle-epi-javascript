@@ -31,7 +31,7 @@ public class EmprestimoController {
 
     @GetMapping("/emprestimos")
     @ResponseBody
-    public List<Emprestimo> listar() {
-        return emprestimoRepository.buscarTodos();
+    public List<EmprestimoDTO> listar() {
+        return emprestimoRepository.buscarTodosDTO();
     }
 }
