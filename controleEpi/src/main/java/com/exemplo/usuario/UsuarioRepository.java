@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -30,7 +31,7 @@ public class UsuarioRepository {
     }
 
     public Usuario buscarPorUsuario(String nome, String email) {
-        String sql = "SELECT * FROM usuarios WHERE nome = ? AND email LIKE ?";
+        String sql = "SELECT * FROM usuarios WHERE email = ?";
         return jdbc.queryForObject(sql, new Object[]{nome, email}, new RowMapper<Usuario>() {
             @Override
             public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -39,13 +40,18 @@ public class UsuarioRepository {
         });
     }
 
-    public List<Usuario> buscarPorUsuarioParcial(String nome, String email) {
-        String sql = "SELECT * FROM devolucoes WHERE nome LIKE ? AND email LIKE ?";
+    public List<Usuario> buscarPorNomeParcial(String nome, String email) {
+        String sql = "SELECT * FROM usuarios WHERE nome LIKE ? AND email = ?";
         return jdbc.query(sql, new Object[]{"%" + nome + "%", "%" + email + "%"}, new RowMapper<Usuario>() {
             @Override
             public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return new Usuario(rs.getString("nome"), rs.getString("email"));
             }
         });
+    }
+
+    public void atualizar(Usuario usuario) {
+        String sql = "UPDATE usuarios SET nome = ?, email = ? WHERE id = ?";
+        jdbc.update(sql, usuario.getNome(), usuario.getEmail());
     }
 }
