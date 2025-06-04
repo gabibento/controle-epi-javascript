@@ -4,7 +4,7 @@ const divCampos = document.querySelector("#campos");
 const entidade = {
   epis: {
     nome: "text",
-    validade: "date"
+    quantidade: "number"
   },
   usuarios: {
     nome: "text",
