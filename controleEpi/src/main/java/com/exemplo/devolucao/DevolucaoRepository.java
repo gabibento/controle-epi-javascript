@@ -44,4 +44,14 @@ public class DevolucaoRepository {
             return new Devolucao(epi, usuario, rs.getDate("dataDevolucao").toLocalDate());
         });
     }
+
+    public void atualizarPorDevolucao(Devolucao devolucao) {
+        String sql = "UPDATE emprestimos SET dataDevolucao = ? WHERE id = ?";
+        jdbc.update(sql, devolucao.getDataDevolucao(), devolucao.getId());
+    }
+
+    public void deletarPorDevolucao(int id) {
+        String sql = "DELETE FROM devolucoes WHERE id = ?";
+        jdbc.update(sql, id);
+    }
 }
