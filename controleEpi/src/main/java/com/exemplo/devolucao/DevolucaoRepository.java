@@ -24,11 +24,10 @@ public class DevolucaoRepository {
                     SELECT
                         e.nome AS nome_epi,
                         u.email AS email_usuario,
-                        emp.data_emprestimo,
-                        emp.data_devolucao
-                    FROM emprestimos emp
-                    JOIN epis e ON emp.epi_id = e.id
-                    JOIN usuarios u ON emp.usuario_id = u.id
+                        dev.data_devolucao
+                    FROM devolucoes dev
+                    JOIN epis e ON dev.epi_id = e.id
+                    JOIN usuarios u ON dev.usuario_id = u.id
                 """;
         return jdbc.query(sql, (rs, rowNum) -> new DevolucaoDTO(
                 rs.getString("nome_epi"),
