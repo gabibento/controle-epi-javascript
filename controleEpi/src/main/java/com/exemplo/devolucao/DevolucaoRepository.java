@@ -20,11 +20,22 @@ public class DevolucaoRepository {
     }
 
     public List<Devolucao> buscarTodos() {
-        return jdbc.query("SELECT * FROM devolucoes", (rs, rowNum) -> {
-            Epi epi = new Epi(rs.getString("nome"), rs.getInt("quantidade"));
-            Usuario usuario = new Usuario(rs.getString("nome"), rs.getString("email"));
-            return new Devolucao(epi, usuario, rs.getDate("dataDevolucao").toLocalDate());
-        });
+        String sql = """
+                    SELECT
+                        e.nome AS nome_epi,
+                        u.email AS email_usuario,
+                        emp.data_emprestimo,
+                        emp.data_devolucao
+                    FROM emprestimos emp
+                    JOIN epis e ON emp.epi_id = e.id
+                    JOIN usuarios u ON emp.usuario_id = u.id
+                """;
+        return jdbc.query(sql, (rs, rowNum) -> new EmprestimoDTO(
+                rs.getString("nome_epi"),
+                rs.getString("email_usuario"),
+                rs.getDate("data_emprestimo").toLocalDate(),
+                rs.getDate("data_devolucao").toLocalDate())); 
+
     }
 
     public Devolucao buscarPorDevolucao(Epi epi, Usuario usuario) {
@@ -43,15 +54,5 @@ public class DevolucaoRepository {
             Usuario usuario1 = new Usuario(rs.getString("nome"), rs.getString("email"));
             return new Devolucao(epi, usuario, rs.getDate("dataDevolucao").toLocalDate());
         });
-    }
-
-    public void atualizarPorDevolucao(Devolucao devolucao) {
-        String sql = "UPDATE emprestimos SET dataDevolucao = ? WHERE id = ?";
-        jdbc.update(sql, devolucao.getDataDevolucao(), devolucao.getId());
-    }
-
-    public void deletarPorDevolucao(int id) {
-        String sql = "DELETE FROM devolucoes WHERE id = ?";
-        jdbc.update(sql, id);
     }
 }

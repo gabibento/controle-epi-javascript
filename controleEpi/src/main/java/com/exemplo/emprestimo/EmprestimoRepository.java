@@ -57,13 +57,4 @@ public class EmprestimoRepository {
         });
     }
 
-    public void atualizarPorEmprestimo(Emprestimo emprestimo) {
-        String sql = "UPDATE emprestimos SET dataEmprestimo = ?, dataDevolucao = ? WHERE id = ?";
-        jdbc.update(sql, emprestimo.getDataEmprestimo(), emprestimo.getDataDevolucao(), emprestimo.getId());
-    }
-
-    public void deletarPorEmprestimo(int id) {
-        String sql = "DELETE FROM emprestimos WHERE id = ?";
-        jdbc.update(sql, id);
-    }
 }
