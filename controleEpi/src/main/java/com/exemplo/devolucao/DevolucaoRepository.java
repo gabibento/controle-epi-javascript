@@ -19,7 +19,7 @@ public class DevolucaoRepository {
         jdbc.update(sql, devolucao.getEpi(), devolucao.getUsuario(), devolucao.getDataDevolucao());
     }
 
-    public List<Devolucao> buscarTodos() {
+    public List<DevolucaoDTO> buscarTodos() {
         String sql = """
                     SELECT
                         e.nome AS nome_epi,
@@ -30,10 +30,9 @@ public class DevolucaoRepository {
                     JOIN epis e ON emp.epi_id = e.id
                     JOIN usuarios u ON emp.usuario_id = u.id
                 """;
-        return jdbc.query(sql, (rs, rowNum) -> new EmprestimoDTO(
+        return jdbc.query(sql, (rs, rowNum) -> new DevolucaoDTO(
                 rs.getString("nome_epi"),
                 rs.getString("email_usuario"),
-                rs.getDate("data_emprestimo").toLocalDate(),
                 rs.getDate("data_devolucao").toLocalDate())); 
 
     }
