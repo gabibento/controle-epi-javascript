@@ -1,11 +1,11 @@
 package com.exemplo.usuario;
 
+import com.exemplo.epi.Epi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.nio.charset.StandardCharsets;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -30,18 +30,19 @@ public class UsuarioRepository {
         });
     }
 
-    public Usuario buscarPorUsuario(String nome, String email) {
+    public Usuario buscarPorEmail(String email) {
         String sql = "SELECT * FROM usuarios WHERE email = ?";
-        return jdbc.queryForObject(sql, new Object[]{nome, email}, new RowMapper<Usuario>() {
+         return jdbc.queryForObject(sql, new Object[]{email}, new RowMapper<Usuario>() {
             @Override
             public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return new Usuario(rs.getString("nome"), rs.getString("email"));
+                Usuario usuario = new Usuario(rs.getString("nome"), rs.getString("email"));
+                return usuario;
             }
         });
     }
 
-    public List<Usuario> buscarPorNomeParcial(String nome, String email) {
-        String sql = "SELECT * FROM usuarios WHERE nome LIKE ? AND email = ?";
+    public List<Usuario> buscarPorNomeOuEmailParcial(String nome, String email) {
+        String sql = "SELECT * FROM usuarios WHERE nome LIKE ? OR email = ?";
         return jdbc.query(sql, new Object[]{"%" + nome + "%", "%" + email + "%"}, new RowMapper<Usuario>() {
             @Override
             public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -50,8 +51,13 @@ public class UsuarioRepository {
         });
     }
 
-    public void atualizar(Usuario usuario) {
-        String sql = "UPDATE usuarios SET nome = ?, email = ? WHERE id = ?";
+    public void atualizarPorEmail(Usuario usuario) {
+        String sql = "UPDATE usuarios SET nome = ?, email = ? WHERE email = ?";
         jdbc.update(sql, usuario.getNome(), usuario.getEmail());
+    }
+
+    public void deletarPorEmail(String email) {
+        String sql = "DELETE FROM usuarios WHERE email = ?";
+        jdbc.update(sql, email);
     }
 }

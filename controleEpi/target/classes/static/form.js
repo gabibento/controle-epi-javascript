@@ -4,19 +4,22 @@ const divCampos = document.querySelector("#campos");
 const entidade = {
   epis: {
     nome: "text",
-    validade: "date"
+    quantidade: "number"
   },
   usuarios: {
     nome: "text",
     email: "email",
   },
   emprestimos: {
-    nomeUsuario: "text",
+    nomeEpi: "text",
+    emailUsuario: "email",
+    dataDevolucao: "date"
+  },
+  devolucoes: {
+    nomeEpi: "text",
+    emailUsuario: "email",
     dataDevolucao: "date"
   }
-  // devolucoes: {
-  //   nome
-  //}
 };
 
 const gerarFormulario = (entidadeSelecionada) => {
@@ -40,6 +43,8 @@ const gerarFormulario = (entidadeSelecionada) => {
 const params = new URLSearchParams(window.location.search);
 const entidadeParam = params.get("entidade");
 
+  console.log(entidadeParam)
 if (entidadeParam) {
+  console.log(entidadeParam)
   gerarFormulario(entidadeParam);
 }

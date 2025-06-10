@@ -4,7 +4,6 @@ import com.exemplo.epi.Epi;
 import com.exemplo.usuario.Usuario;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class Devolucao {
     private static int contadorId = 1;
