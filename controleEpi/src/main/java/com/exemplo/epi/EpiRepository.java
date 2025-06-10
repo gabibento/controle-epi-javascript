@@ -16,7 +16,7 @@ public class EpiRepository {
     private JdbcTemplate jdbc;
 
     public void salvar(Epi epi) {
-        String sql = "INSERT INTO epis (nome, validade) VALUES (?, ?)";
+        String sql = "INSERT INTO epis (nome, quantidade) VALUES (?, ?)";
         System.out.println(epi);
         jdbc.update(sql, epi.getNome(), epi.getQuantidade());
     }
@@ -53,8 +53,8 @@ public class EpiRepository {
     }
 
     public void atualizarPorNome(Epi epi) {
-        String sql = "UPDATE epis SET nome = ?, validade = ? WHERE nome = ?";
-        jdbc.update(sql, epi.getNome(), epi.getValidade());
+        String sql = "UPDATE epis SET nome = ?, quantidade = ? WHERE nome = ?";
+        jdbc.update(sql, epi.getNome(), epi.getQuantidade());
     }
 
     public void deletarPorNome(String nome) {
