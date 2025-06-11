@@ -52,9 +52,9 @@ public class EpiRepository {
         });
     }
 
-    public void atualizarPorNome(Epi epi) {
+    public void atualizarPorNome(Epi epi, String nome) {
         String sql = "UPDATE epis SET nome = ?, quantidade = ? WHERE nome = ?";
-        jdbc.update(sql, epi.getNome(), epi.getQuantidade());
+        jdbc.update(sql, epi.getNome(), epi.getQuantidade(), nome);
     }
 
     public void deletarPorNome(String nome) {
