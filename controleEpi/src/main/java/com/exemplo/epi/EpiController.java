@@ -17,8 +17,10 @@ public class EpiController {
 
     @PostMapping("/epis")
     public String salvar(@RequestParam String nome, @RequestParam int quantidade) {
+        if (nome == null || nome.trim().isEmpty() || quantidade < 0) {
+        return "redirect:/erro";
+    }
         epiRepository.salvar(new Epi(nome, quantidade));
-        System.out.println(nome + quantidade);
         return "redirect:/epis";
     }
 

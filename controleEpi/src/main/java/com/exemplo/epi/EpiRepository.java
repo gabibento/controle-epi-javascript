@@ -53,7 +53,7 @@ public class EpiRepository {
     }
 
     public void atualizarPorNome(Epi epi) {
-        String sql = "UPDATE epis SET nome = ?, validade = ? WHERE nome = ?";
+        String sql = "UPDATE epis SET nome = ?, quantidade = ? WHERE nome = ?";
         jdbc.update(sql, epi.getNome(), epi.getQuantidade());
     }
 
