@@ -15,8 +15,8 @@ public class DevolucaoRepository {
     private JdbcTemplate jdbc;
 
     public void salvar(Devolucao devolucao) {
-        String sql = "INSERT INTO devolucoes (epi, usuario, dataDevolucao) VALUES (?, ?, ?)";
-        jdbc.update(sql, devolucao.getEpi(), devolucao.getUsuario(), devolucao.getDataDevolucao());
+        String sql = "INSERT INTO devolucoes (epi_id, usuario_id, data_devolucao) VALUES (?, ?, ?)";
+        jdbc.update(sql, devolucao.getEpi().getId(), devolucao.getUsuario().getId(), devolucao.getDataDevolucao());
     }
 
     public List<DevolucaoDTO> buscarTodos() {

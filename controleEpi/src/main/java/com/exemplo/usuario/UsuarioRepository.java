@@ -51,9 +51,9 @@ public class UsuarioRepository {
         });
     }
 
-    public void atualizarPorEmail(Usuario usuario) {
+    public void atualizarPorEmail(Usuario usuario, String email) {
         String sql = "UPDATE usuarios SET nome = ?, email = ? WHERE email = ?";
-        jdbc.update(sql, usuario.getNome(), usuario.getEmail());
+        jdbc.update(sql, usuario.getNome(), usuario.getEmail(), email);
     }
 
     public void deletarPorEmail(String email) {
