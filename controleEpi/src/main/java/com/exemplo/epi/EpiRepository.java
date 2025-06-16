@@ -17,7 +17,6 @@ public class EpiRepository {
 
     public void salvar(Epi epi) {
         String sql = "INSERT INTO epis (nome, quantidade) VALUES (?, ?)";
-        System.out.println(epi);
         jdbc.update(sql, epi.getNome(), epi.getQuantidade());
     }
 
@@ -32,18 +31,18 @@ public class EpiRepository {
 
     public Epi buscarPorNome(String nome) {
         String sql = "SELECT * FROM epis WHERE nome = ?";
-        return jdbc.queryForObject(sql, new Object[]{nome}, new RowMapper<Epi>() {
-        @Override
-        public Epi mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new Epi(rs.getString("nome"), rs.getInt("quantidade"));
-        }
-    });
+        return jdbc.queryForObject(sql, new Object[] { nome }, new RowMapper<Epi>() {
+            @Override
+            public Epi mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new Epi(rs.getInt("id"), rs.getString("nome"), rs.getInt("quantidade"));
+            }
+        });
 
     }
 
     public List<Epi> buscarPorEpiParcial(String nome) {
         String sql = "SELECT * FROM epis WHERE nome LIKE ?";
-        return jdbc.query(sql, new Object[]{"%" + nome + "%"}, new RowMapper<Epi>() {
+        return jdbc.query(sql, new Object[] { "%" + nome + "%" }, new RowMapper<Epi>() {
             @Override
             public Epi mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Epi epi = new Epi(rs.getString("nome"), rs.getInt("quantidade"));

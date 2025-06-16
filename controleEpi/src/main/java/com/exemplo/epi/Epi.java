@@ -1,30 +1,26 @@
 package com.exemplo.epi;
 
 public class Epi {
-    private static int contadorId = 1;
-    private int id;
+    private Integer id;
     private String nome;
     private int quantidade;
 
-    public Epi(String nome, int quantidade) {
-        this.id = contadorId++;
+    public Epi(Integer id, String nome, int quantidade) {
+        this.id = id;
         this.nome = nome;
         this.quantidade = quantidade;
     }
 
-    public static int getContadorId() {
-        return contadorId;
+    public Epi(String nome, int quantidade) {
+        this.nome = nome;
+        this.quantidade = quantidade;
     }
 
-    public static void setContadorId(int contadorId) {
-        Epi.contadorId = contadorId;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -43,6 +39,4 @@ public class Epi {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-
-    
 }

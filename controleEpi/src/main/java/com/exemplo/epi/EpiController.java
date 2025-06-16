@@ -38,6 +38,10 @@ public class EpiController {
         epiRepository.atualizarPorNome(new Epi(novoNome, novaQuantidade), nome);
          return "redirect:/epis";
     }
-    
+     @PostMapping("/deletarEpi")
+    public String deletar(@RequestParam String nome){
+        epiRepository.deletarPorNome(nome);
+         return "redirect:/epis";
+    }
     
 }
