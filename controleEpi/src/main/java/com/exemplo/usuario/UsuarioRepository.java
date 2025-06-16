@@ -35,7 +35,7 @@ public class UsuarioRepository {
          return jdbc.queryForObject(sql, new Object[]{email}, new RowMapper<Usuario>() {
             @Override
             public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Usuario usuario = new Usuario(rs.getString("nome"), rs.getString("email"));
+                Usuario usuario = new Usuario(rs.getInt("id"), rs.getString("nome"), rs.getString("email"));
                 return usuario;
             }
         });
