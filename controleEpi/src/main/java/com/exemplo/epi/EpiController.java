@@ -20,9 +20,9 @@ public class EpiController {
 
     @PostMapping()
     public String salvar(@RequestParam String nome, @RequestParam int quantidade) {
-        if (nome == null || nome.trim().isEmpty() || quantidade < 0) {
-        return "redirect:/erro";
-    }
+        if (quantidade < 0) {
+            return "Erro: Insira um valor inteiro maior que 0.";
+        }
         epiRepository.salvar(new Epi(nome, quantidade));
         return "redirect:/epis";
     }
@@ -35,6 +35,9 @@ public class EpiController {
 
     @PostMapping("/atualizarEpi")
   public String atualizar(@RequestParam String nome, @RequestParam String novoNome, @RequestParam int novaQuantidade) {
+        if(novaQuantidade <= 0){
+            return "Erro: Insira um valor inteiro maior que 0.";
+        }
         epiRepository.atualizarPorNome(new Epi(novoNome, novaQuantidade), nome);
          return "redirect:/epis";
     }
